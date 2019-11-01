@@ -141,6 +141,19 @@ def send_email(body: str):
         dump_email_content(body)
         return
 
+    if mail_ask_before_send:
+        step_log("Ask before send email enabled")
+        answer = input("     Send email (y/n): ").lower().strip()
+        print("")
+
+        while not(answer == "y" or answer == "yes" or
+                  answer == "n" or answer == "no"):
+            answer = input("Send email (y/n): ").lower().strip()
+
+        if answer[0] == "n":
+            dump_email_content(body)
+            return
+
     step_log("Sending email\n\tTo: %s\tSubject: %s" % (mail_to, mail_subject))
     dump_email_content(body)
     msg = EmailMessage()
@@ -201,6 +214,7 @@ mail_to = config.get('email', 'to')
 mail_server = config.get('email', 'server')
 mail_subject = config.get('email', 'subject').format(**lists_dict)
 mail_send = config.get('email', 'send').lower() in ['true', 'yes', '1']
+mail_ask_before_send = config.get('email', 'ask_before_send').lower() in ['true', 'false', '1']
 
 # Trello URLs
 URL_BASE="https://api.trello.com"
