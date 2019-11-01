@@ -200,7 +200,7 @@ mail_from = config.get('email', 'from')
 mail_to = config.get('email', 'to')
 mail_server = config.get('email', 'server')
 mail_subject = config.get('email', 'subject').format(**lists_dict)
-mail_send = config.get('email', 'send').lower() in ['true', '1']
+mail_send = config.get('email', 'send').lower() in ['true', 'yes', '1']
 
 # Trello URLs
 URL_BASE="https://api.trello.com"
