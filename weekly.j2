@@ -1,0 +1,22 @@
+This is my status for Week {{ week }}
+
+{% for l in lists %}
+- {{ l['name'] if l['name'] != donelabel else 'Done' }}
+    {%- for c in l['cards'] %}
+    - {{ c['name'] }}
+        {%- if c['checklists'] %}
+            {%- for cl in c['checklists'] %}
+        [{{ cl['name'] }}]{% if cl['complete'] %}
+            Completed:
+            {%- for cli in cl['complete'] %}
+                 - {{ cli }}{% endfor -%}
+                {% endif -%}
+                {%- if cl['incomplete'] %}
+            Pending:
+            {%- for cli in cl['incomplete'] %}
+                - {{ cli }}{% endfor -%}
+                {% endif -%}
+            {% endfor -%}
+        {% endif -%}
+    {% endfor %}
+{% endfor %}
