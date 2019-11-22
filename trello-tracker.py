@@ -141,6 +141,9 @@ def send_email(body: str):
         dump_email_content(body)
         return
 
+    step_log("Dumping email body")
+    dump_email_content(body)
+
     if mail_ask_before_send:
         step_log("Ask before send email enabled")
         answer = input("     Send email (y/n): ").lower().strip()
@@ -151,11 +154,9 @@ def send_email(body: str):
             answer = input("Send email (y/n): ").lower().strip()
 
         if answer[0] == "n":
-            dump_email_content(body)
             return
 
     step_log("Sending email\n\tTo: %s\tSubject: %s" % (mail_to, mail_subject))
-    dump_email_content(body)
     msg = EmailMessage()
     msg.set_content(body)
     msg['Subject'] = mail_subject
