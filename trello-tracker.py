@@ -197,7 +197,10 @@ boardid = config.get('trello', 'boardid')
 now = datetime.datetime.now()
 nowiso = now.isocalendar()
 year = nowiso[0]
-week = nowiso[1]
+if os.environ['WEEK'] != "" :
+    week = os.environ['WEEK']
+else:    
+    week = nowiso[1]
 lists_dict = {"WEEK": week, "YEAR": year}
 
 #
