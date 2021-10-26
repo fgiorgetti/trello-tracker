@@ -104,7 +104,7 @@ def load_cards():
                 continue
 
             # Adding cards with done and pending checklist items
-            tlc={"name": card["name"], "id": card["id"], "checklists": []}
+            tlc={"name": card["name"], "desc": card["desc"], "id": card["id"], "checklists": []}
             tl['cards'].append(tlc)
 
             # Retrieving checklists
